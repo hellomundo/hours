@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -25,6 +26,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 # Use Foundation css framework
 gem 'foundation-rails'
+gem 'sprockets'
+gem 'bcrypt'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
