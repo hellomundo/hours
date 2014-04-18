@@ -29,6 +29,13 @@
     </nav>
     <div class="container">
       <div class="large-12 columns">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="container">
+      <div class="large-12 columns">
         <%= yield %>
       </div>
     </div>
