@@ -32,7 +32,9 @@ class UsersController < ApplicationController
   def update
     # already defined in correct_user
     # @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    
+
+    if @user.update_attributes_without_requiring_password(user_params)
       flash[:success] = "OK, made those changes. You're good."
       redirect_to @user
     else 
@@ -45,7 +47,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-  
+    
   #before filters
   
   def signed_in_user

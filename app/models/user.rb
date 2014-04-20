@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   
   has_secure_password
 
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, :if => :password
   
   def User.new_remember_token
     SecureRandom.urlsafe_base64
@@ -18,11 +18,18 @@ class User < ActiveRecord::Base
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
+
+  def update_attributes_without_requiring_password(params)
+    if params[:password].blank?
+      params.delete :password
+      params.delete :password_confirmation
+      update_attributes params
+    end
+  end
   
   private 
   
   def create_remember_token
     self.remember_token = User.digest(User.new_remember_token)
   end
-  
 end
