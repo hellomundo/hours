@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418230823) do
+ActiveRecord::Schema.define(version: 20140422222031) do
+
+  create_table "clients", force: true do |t|
+    t.string   "name"
+    t.boolean  "is_active",  default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "efforts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "duration"
+    t.datetime "performed_on"
+    t.integer  "rate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.datetime "start_date"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_active",  default: true
+  end
+
+  add_index "projects", ["client_id"], name: "index_projects_on_client_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -20,6 +48,8 @@ ActiveRecord::Schema.define(version: 20140418230823) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
+    t.datetime "last_login"
+    t.integer  "default_rate"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

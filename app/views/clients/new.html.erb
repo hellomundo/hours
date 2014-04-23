@@ -1,0 +1,22 @@
+<% provide(:title, 'New Client on Sequitur Clock') %>
+<div class="row">
+  <div class="large-6 columns">
+    <h3>New Client</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <%= form_for(@client) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    
+      <%= f.check_box :is_active, :checked => true %>
+      <%= f.label :is_active %>
+        
+      <%= f.submit "Create Client", class: "button [radius round]" %>
+    <% end %>
+  </div>
+</div>

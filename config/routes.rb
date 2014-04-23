@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :users
+  resources :efforts, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :clients do
+    resources :projects, only: [:create, :show, :destroy]
+  end
   
+  resources :projects, only: [:index]
+ 
   root 'pages#home'
   
   get 'pages/home'

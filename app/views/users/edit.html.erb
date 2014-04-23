@@ -1,15 +1,23 @@
-<h1>Edit</h1>
+<% provide(:title, 'Editing' + @user.name + ' on Sequitur Clock') %>
+<div class="row">
+  <div class="large-6 columns">
+    <h3>Users</h3>
+  </div>
+</div>
 
 <div class="row">
   <div class="large-6 columns">
     <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages', object: f.object %>
       
       <%= f.label :name %>
       <%= f.text_field :name %>
     
       <%= f.label :email %>
       <%= f.text_field :email %>
+    
+      <%= f.label :default_rate %>
+      <%= f.text_field :default_rate %>
     
       <%= f.label :password %>
       <%= f.password_field :password %>

@@ -1,0 +1,30 @@
+<% provide(:title, 'Projects on Sequitur Clock') %>
+<div class="row">
+  <div class="large-6 columns">
+    <h3>All Projects</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Hours</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+<% @projects.each do |project| %>
+        <tr>
+          <% @client = project.client %>
+          <td><%= @client.name  %> <%= link_to project.name, client_project_path(@client, project) %></td>
+          <td>0</td>
+          <td><%= link_to "Delete", [@client, project], method: :delete, data: { confirm: 'Are you sure?' } %>  deactivate</td>
+        </tr>
+<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,8 +1,7 @@
-<% provide(:title, @user.name + ' is on Sequitur Clock') %>
+<% provide(:title, 'Sequitur Clock Users') %>
 <div class="row">
   <div class="large-6 columns">
-    <h3><%= @user.name %> </h3>
-    <p><%= @user.email %></p>
+    <h3><%= link_to @project.client.name, @project.client %> <%= @project.name %></h3>
   </div>
 </div>
 
@@ -12,7 +11,7 @@
     <table>
       <thead>
         <tr>
-          <th>Project</th>
+          <th>Craftsman</th>
           <th>Date</th>
           <th>Rate</th>
           <th>Hours</th>
@@ -22,7 +21,7 @@
       <tbody>
 <% @efforts.each do |effort| %>
         <tr>
-          <td><%= link_to effort.project.full_name, client_project_path(effort.project.client, effort.project) %></td>
+          <td><%= link_to effort.user.name, user_path(effort.user) %></td>
           <td><%= pretty_date(effort.performed_on) %></td>
           <td><%= effort.rate %></td>
           <td><%= effort.hours %></td>

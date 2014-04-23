@@ -1,2 +1,69 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="row">
+  <div class="large-6 columns">
+    <h3>Welcome</h3>
+  </div>
+</div>
+    <%= form_for(@effort) do |f| %>
+<div class="row">
+  <div class="large-8 columns">
+      <%= render 'shared/error_messages', object: f.object %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-4 columns">
+      <%= f.label :project %>
+      <%= collection_select(:effort, :project_id, Project.all, :id, :full_name) %>
+  </div>
+  <div class="large-3 columns" >
+      <%= f.label :performed_on %>
+      <%= f.date_field :performed_on, :value => Time.now.strftime("%Y-%m-%d") %>
+  </div>
+  <div class="large-2 columns">
+      <%= f.label :hours %>
+      <%= f.select :hours, (1..12), selected: 4 %>
+  </div>
+  <div class="large-2 columns end">
+      <%= f.label :rate %>
+      <%= f.text_field :rate, value: current_user.default_rate %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-3 columns end">
+    <br/>
+      <%= f.submit "Save", class: "button radius" %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-8 columns">
+  </div>
+</div>
+    <% end %>
+<div class="row">
+  <div class="large-12 columns">
+    <h4>Efforts</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Craftsman</th>
+          <th>Date</th>
+          <th>Rate</th>
+          <th>Hours</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+<% @efforts.each do |effort| %>
+        <tr>
+          <td><%= link_to effort.project.full_name, client_project_path(effort.project.client, effort.project) %></td>
+          <td><%= link_to effort.user.name, user_path(effort.user) %></td>
+          <td><%= pretty_date(effort.performed_on) %></td>
+          <td><%= effort.rate %></td>
+          <td><%= effort.hours %></td>
+          <td><%= link_to "Delete", effort_path(effort), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+        </tr>
+<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

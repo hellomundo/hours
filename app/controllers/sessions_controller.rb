@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+  before_action :signed_in_user, except: [:new, :create]
+
   def new
   end
   

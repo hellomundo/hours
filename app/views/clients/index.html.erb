@@ -1,0 +1,33 @@
+<% provide(:title, 'Sequitur Clock Clients') %>
+<div class="row">
+  <div class="large-6 columns">
+    <h3>Clients</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Total Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clients.each do |client| %>
+        <tr>
+          <td><%= link_to client.name, client_path(client) %></td>
+          <td>0</td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <%= link_to "New", new_client_path, class: "button" %>
+  </div>
+</div>
