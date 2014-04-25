@@ -1,7 +1,11 @@
-<%= provide(:title, "Sign in") %>
-<h1>Sign in</h1>
+<% provide(:title, 'Sequitur Clock Sign In') %>
+<div class="row section">
+  <div class="large-6 columns">
+    <h3>Sign In</h3>
+  </div>
+</div>
 
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <%= form_for(:session, url: sessions_path) do |f| %>
     

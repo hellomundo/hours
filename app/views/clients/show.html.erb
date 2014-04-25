@@ -1,5 +1,5 @@
 <% provide(:title, @client.name + ' on Sequitur Clock') %>
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <h3><%= @client.name %></h3>
   </div>
@@ -7,16 +7,21 @@
 
 <div class="row">
   <div class="large-6 columns">
-    <%= @client.name %> <% if @client.is_active %>(Active)<% else %>(Inactive)<% end %>
+    Currently <% if @client.is_active %>(Active)<% else %>(Inactive)<% end %>
   </div>
+</div>
+<div class="row">
   <div class="large-6 columns">
     <%= link_to "Edit", edit_client_path(@client), class: "button" %> <%= link_to "Delete", client_path(@client), method: :delete, data: { confirm: 'Are you sure?' }, class: "button"  %> 
   </div>
 </div>
 
 
-<div class="row">
-  <div class="large-12 columns">
+<div class="row section">
+  <div class="large-8 columns end">
+    <h4>Current Projects</h4>
+  </div>
+  <div class="large-8 columns end">
     <table>
       <thead>
         <tr>
@@ -39,20 +44,34 @@
 </div>
 
 
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
-    <h2>Add new project</h2>
-    <%= form_for([@client, @client.projects.build]) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-      <%= f.label :start_date %>
-      <%= f.date_field :start_date, :value => Time.now.strftime("%Y-%m-%d") %>
-
-      <%= f.check_box :is_active %>
-      <%= f.label :is_active %>
-      
-      <%= f.submit "Create project", class: "button [radius round]" %>
-    <% end %>
+    <h4>Add new project</h4>
   </div>
 </div>
+
+<%= form_for([@client, @client.projects.build]) do |f| %>
+<div class="row">
+  <div class="large-6 columns">
+      <%= render 'shared/error_messages', object: f.object %>
+  </div>
+  <div class="large-4 columns">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+  </div>
+  <div class="large-3 columns">
+      <%= f.label :start_date %>
+      <%= f.date_field :start_date, :value => Time.now.strftime("%Y-%m-%d") %>
+  </div>
+  <div class="large-2 columns end">
+      <br />
+      <%= f.check_box :is_active %>
+      <%= f.label :is_active %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+      <%= f.submit "Create a new project", class: "button [radius round]" %>
+  </div>
+</div>
+<% end %>

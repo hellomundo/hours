@@ -16,8 +16,14 @@
 
  */
 
+body {
+  background-color: #ddd;
+}
+
 table {
   width: 100%;
+  border-collapse: collapse;
+  border-width: 0px;
 }
 
 td, th {
@@ -29,5 +35,14 @@ tr:hover {
 }
 
 .container {
+  margin-top: 0rem;
+}
+
+.section {
   margin-top: 3rem;
+}
+
+.databox {
+  background-color: white;
+  padding: 10px 13px;
 }

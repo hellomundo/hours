@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, except: [:new]
+  before_action :signed_in_user, except: [:new, :create]
   before_action :correct_user, only: [:edit, :update]
   
   def index
@@ -18,9 +18,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      sign_in @user
       flash[:success] = "Start Clocking that Time!"
       redirect_to @user
     else 
+      flash[:notice] = "We have a problem, Houston"
       render 'new'
     end
   end

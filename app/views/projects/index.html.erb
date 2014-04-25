@@ -1,11 +1,11 @@
 <% provide(:title, 'Projects on Sequitur Clock') %>
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <h3>All Projects</h3>
   </div>
 </div>
 
-<div class="row">
+<div class="row section">
   <div class="large-12 columns">
     <table>
       <thead>
@@ -20,7 +20,7 @@
         <tr>
           <% @client = project.client %>
           <td><%= @client.name  %> <%= link_to project.name, client_project_path(@client, project) %></td>
-          <td>0</td>
+          <td><%= duration_to_hours(project.efforts.sum(:duration)) %></td>
           <td><%= link_to "Delete", [@client, project], method: :delete, data: { confirm: 'Are you sure?' } %>  deactivate</td>
         </tr>
 <% end %>

@@ -1,11 +1,11 @@
 <% provide(:title, 'Editing' + @user.name + ' on Sequitur Clock') %>
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
-    <h3>Users</h3>
+    <h3>Settings</h3>
   </div>
 </div>
 
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>

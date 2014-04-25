@@ -1,11 +1,11 @@
 <% provide(:title, 'Editing' + @client.name + ' on Sequitur Clock') %>
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <h3><%= @client.name %></h3>
   </div>
 </div>
 
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <%= form_for(@client) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>

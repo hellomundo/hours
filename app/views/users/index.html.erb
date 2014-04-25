@@ -1,29 +1,23 @@
 <% provide(:title, 'Sequitur Clock Users') %>
-<div class="row">
+<div class="row section">
   <div class="large-6 columns">
     <h3>Users</h3>
   </div>
 </div>
 
-<div class="row">
-  <div class="large-6 columns">
-    <table>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Last Login</th>
-          <th>Total Hours</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to user.name, user %></td>
-          <td><%= user.created_at.strftime("%B %d at %I:%M %p") %></td>
-          <td>0</td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+<div class="row section">
+  <div class="large-12 columns">
+    <ul class="large-block-grid-3">
+    <% @users.each do |user| %>
+      <li>
+        <div class="databox">
+          <h4><%= link_to user.name, user %></h4>
+          <p class="timestamp">Last Login: <%= user.created_at.strftime("%B %d at %I:%M %p") %></p>
+          <h1><%= duration_to_hours(user.efforts.sum(:duration)) %> hrs</h1>
+        </div>
+      </li>
+    <% end %>
+    </ul>
   </div>
 </div>
+
