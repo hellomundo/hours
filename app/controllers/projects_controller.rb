@@ -38,6 +38,16 @@ class ProjectsController < ApplicationController
       render 'edit'
     end
   end
+
+  def toggle_activation
+    @project = Project.find(params[:id])
+    if(@project.toggle!(:is_active))
+      redirect_to projects_path
+    else
+      #flash something
+      redirect_to projects_path
+    end
+  end
   
   def destroy
     @project = Project.find(params[:id])

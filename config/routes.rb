@@ -4,9 +4,17 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :clients do
     resources :projects, only: [:create, :show, :destroy]
+    
+    member do
+      post 'toggle_activation' 
+    end
   end
   
-  resources :projects, only: [:index]
+  resources :projects, only: [:index, :toggle_activation] do
+    member do
+      post 'toggle_activation' 
+    end
+  end
  
   root 'pages#home'
   

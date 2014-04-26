@@ -2,7 +2,8 @@ class ClientsController < ApplicationController
   before_action :signed_in_user
 
   def index
-    @clients = Client.all
+    @clients = Client.active
+    @inclients = Client.inactive
   end
   
   def new
@@ -39,6 +40,17 @@ class ClientsController < ApplicationController
     end
   end
   
+  def toggle_activation
+    @client = Client.find(params[:id])
+    @client.deactivate
+    if(@client.save)
+      redirect_to @client
+    else
+      #flash something
+      redirect_to @client
+    end
+  end
+
   def destroy
     @client = Client.find(params[:id])
     @client.destroy

@@ -6,6 +6,9 @@
 </div>
 <div class="row section">
   <div class="large-12 columns">
+    <h4>Active Clients</h4>
+  </div>
+  <div class="large-12 columns">
     <ul class="large-block-grid-3">
     <% @clients.each do |client| %>
       <li>
@@ -18,6 +21,26 @@
     </ul>
   </div>
 </div>
+
+<% if @inclients.any? %>
+<div class="row section">
+  <div class="large-12 columns">
+    <h4>Inactive Clients</h4>
+  </div>
+  <div class="large-12 columns">
+    <ul class="large-block-grid-3">
+    <% @inclients.each do |client| %>
+      <li>
+        <div class="databox">
+          <h4><%= link_to client.name, client_path(client) %></h4>
+          <h1>0 hrs</h1>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
 
 <div class="row section">
   <div class="large-6 columns">

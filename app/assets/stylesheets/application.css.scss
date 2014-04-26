@@ -45,4 +45,13 @@ tr:hover {
 .databox {
   background-color: white;
   padding: 10px 13px;
+  position: relative;
+  min-height: 10em;
+  
+  .actions {
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 8px;
+  }
 }
+

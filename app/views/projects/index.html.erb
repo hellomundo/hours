@@ -7,24 +7,23 @@
 
 <div class="row section">
   <div class="large-12 columns">
-    <table>
-      <thead>
-        <tr>
-          <th>Project</th>
-          <th>Hours</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-<% @projects.each do |project| %>
-        <tr>
-          <% @client = project.client %>
-          <td><%= @client.name  %> <%= link_to project.name, client_project_path(@client, project) %></td>
-          <td><%= duration_to_hours(project.efforts.sum(:duration)) %></td>
-          <td><%= link_to "Delete", [@client, project], method: :delete, data: { confirm: 'Are you sure?' } %>  deactivate</td>
-        </tr>
-<% end %>
-      </tbody>
-    </table>
+    <ul class="large-block-grid-3">
+    <% @projects.each do |project| %>
+    <% @client = project.client %>
+      <li>
+        <div class="databox">
+          <h4><%= @client.name  %> <%= link_to project.name, client_project_path(@client, project) %></h4>
+          <h1><%= duration_to_hours(project.efforts.sum(:duration)) %> hrs</h1>
+          <p class="actions">
+              <% if project.is_active %> 
+      <%= link_to 'Deactivate', toggle_activation_project_path(project), :method => :post %>
+    <% else %>
+      <%= link_to 'Activate', toggle_activation_project_path(project), :method => :post %>
+    <% end %> | <%= link_to "Delete", [@client, project], method: :delete, data: { confirm: 'Are you sure?' } %> </p>
+        </div>
+      </li>
+    <% end %>
+    </ul>
   </div>
 </div>
+
