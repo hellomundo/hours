@@ -55,3 +55,40 @@ tr:hover {
   }
 }
 
+input.natural {
+  border-radius: 4px;
+  background: none;
+  height: auto;
+  width: 2.5em;
+  padding-left: 0.75rem;
+  display: inline-block;
+  border: 0px;
+  font-size: 3rem;
+  color: #179AD8;
+}
+
+p.natural {
+  display: inline-block;
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+input.three-digit {
+}
+
+/* For note style text areas */
+.notes {
+  color: #666;
+  width: 100%;
+  outline: none;
+  width: 20%;
+  border: 0px;
+  height: 8em;
+  line-height: 31px;
+  background-image: -webkit-linear-gradient(left, white 0, transparent 0), -webkit-linear-gradient(right, white 0, transparent 0), -webkit-linear-gradient(white 30px, #bcf 30px, #bcf 31px, white 31px);
+  background-repeat: repeat-y;
+  background-size: 100% 100%, 100% 100%, 100% 31px;
+  background-attachment: local;  
+}
+
+

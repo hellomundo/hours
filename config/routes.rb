@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    member do
+      post 'send_reminder_email'
+    end
+  end
   resources :efforts, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :clients do
@@ -15,6 +19,8 @@ Rails.application.routes.draw do
       post 'toggle_activation' 
     end
   end
+  
+  get "users/since/:since", to: "users#index", as: "users_since"
  
   root 'pages#home'
   

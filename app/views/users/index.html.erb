@@ -4,7 +4,23 @@
     <h3>Users</h3>
   </div>
 </div>
-
+<div class="row section">
+  <div class="large-12 columns">
+    <div class="button-bar">
+      <ul class="button-group radius">
+        <li><%= link_to "This Week", users_since_path(Date.today.beginning_of_week.to_s), class: "small button" %></li>
+        <li><%= link_to "This Month", users_since_path(Date.today.beginning_of_month.to_s), class: "small button" %></li>
+        <li><%= link_to "This Year", users_since_path(Date.today.beginning_of_year.to_s), class: "small button" %></li>
+        <li><%= link_to "All Time", users_path, class: "small button" %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row section">
+  <div class="large-12 columns">
+    Showing efforts since <%= @nice_day %>.
+  </div>
+</div>
 <div class="row section">
   <div class="large-12 columns">
     <ul class="large-block-grid-3">
@@ -13,7 +29,7 @@
         <div class="databox">
           <h4><%= link_to user.name, user %></h4>
           <p class="timestamp">Last Login: <%= user.created_at.strftime("%B %d at %I:%M %p") %></p>
-          <h1><%= duration_to_hours(user.efforts.sum(:duration)) %> hrs</h1>
+          <h1><%= duration_to_hours(user.efforts.where("performed_on >= :d", {d: @day}).sum(:duration)) %> hrs</h1>
         </div>
       </li>
     <% end %>

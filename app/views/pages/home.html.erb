@@ -1,6 +1,7 @@
 <div class="row section">
   <div class="large-6 columns">
-    <h3>Welcome</h3>
+    <h3>I am <%= @current_user.name %>. Hear me roar!</h3>
+    <h3>&nbsp;</h3>
   </div>
 </div>
     <%= form_for(@effort) do |f| %>
@@ -10,28 +11,23 @@
   </div>
 </div>
 <div class="row">
-  <div class="large-4 columns">
-      <%= f.label :project %>
-      <%= collection_select(:effort, :project_id, Project.all, :id, :full_name) %>
-  </div>
-  <div class="large-3 columns" >
-      <%= f.label :performed_on %>
-      <%= f.date_field :performed_on, :value => Time.now.strftime("%Y-%m-%d") %>
-  </div>
-  <div class="large-2 columns">
-      <%= f.label :hours %>
-      <%= f.select :hours, (1..12), selected: 4 %>
-  </div>
-  <div class="large-2 columns end">
-      <%= f.label :rate %>
-      <%= f.text_field :rate, value: current_user.default_rate %>
+  <div class="large-12 columns">
+      <p class="natural">I worked on</p>
+      <%= collection_select(:effort, :project_id, Project.active, :id, :full_name, {}, {class: 'natural'}) %>
+      <p class="natural">on</p>
+      <%= f.select :performed_on, options_for_select(@date_options), {}, {class: 'natural'} %>
+      <p class="natural">for</p>
+      <%= f.select :hours, (1..12), {selected: 4}, {class: 'natural'} %>
+      <p class="natural">hrs at</p>
+      <%= f.text_field :rate, value: current_user.default_rate, type: 'number', step: '10', class: 'natural three-digit' %>
+      <p class="natural">/hr</p>
   </div>
 </div>
 <div class="row">
   <div class="large-11 columns end">
     <br/>
       <%= f.label :description %>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, class: 'notes' %>
   </div>
 </div>
 <div class="row">

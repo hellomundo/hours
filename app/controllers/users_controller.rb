@@ -4,6 +4,21 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    if(params[:since])
+      @users = User.all
+      @day = Date.parse(params[:since])
+      @nice_day = @day.strftime("%A %B %d, %Y")
+      #day = d.beginning_of_week.strftime
+      @efforts = Effort.where("performed_on >= :d", {d: @day})
+      @groups = @efforts.group_by(&:user_id)
+      #for each in groups
+      # @b = User.joins(:efforts).where("performed_on >= :d", {d: Time.now.beginning_of_year})
+
+    else
+      @day = Date.new(2013, 1, 1)
+      @nice_day = "the beginning of time"
+      @users = User.all
+    end
   end
   
   def show
@@ -43,6 +58,11 @@ class UsersController < ApplicationController
     else 
       render 'edit'
     end
+  end
+  
+  def send_reminder_email
+    @user = User.find(params[:id])
+    UserMailer.reminder_email(@user).deliver
   end
   
   private
